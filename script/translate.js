@@ -26,7 +26,7 @@ async function doTranslate(message, language) {
             "messages": [
                 {
                     "role": "system",
-                    "content": "你是一个翻译助手，你的任务是将英文文本翻译成指定的语言。请将以下英文文本翻译成" + language + "："
+                    "content": "你是一个翻译助手，你的任务是将英文文本翻译成指定的语言。请将以下英文文本翻译成" + language + "：" + '\n' + '限制：不要输出与翻译无关的任何内容，仅做翻译任务'
                 },
                 {
                     "role": "user",
@@ -37,6 +37,10 @@ async function doTranslate(message, language) {
     });
 
     const data = await response.json();
+
+    if (data.error){
+        throw new Error("翻译失败: ", data.error.message);
+    }
 
     return data.choices[0].message.content
 }
@@ -59,6 +63,7 @@ function putObjectValue(obj, key, value) {
 async function translate(waitTranslateList, targetObject, targetLanguage) {
     let promises = [];
     let doNum = 0;
+    let concurrentNum = process.env.OPENAI_API_CONCURRENT || 2;
 
     for (let i = 0; i < waitTranslateList.length; i++) {
         let item = waitTranslateList[i];
@@ -73,7 +78,7 @@ async function translate(waitTranslateList, targetObject, targetLanguage) {
             console.log("剩余翻译数量", waitTranslateList.length - doNum);
         }))
 
-        if (promises.length > 3){
+        if (promises.length > concurrentNum){
             await Promise.all(promises);
             // 睡眠1s
             await new Promise(resolve => setTimeout(resolve, 1000));
