@@ -11,7 +11,7 @@ n8nio/n8n
 ```
 
 ## docker-compose安装
-请切换到对应版本的tag后，在执行
+> 请切换到对应版本的tag后，在执行
 ```shell
 # 拉取代码
 git clone https://github.com/other-blowsnow/n8n-i18n-chinese
