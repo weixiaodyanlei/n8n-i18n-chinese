@@ -36,6 +36,9 @@ docker-compose up
 1. 手动添加 zh-CN.json 到 editor-ui `/src/plugins/i18n/locales/` 里面，然后重新编译
 2. 环境里面设置语言即可正常使用中文  `N8N_DEFAULT_LOCALE=zh-CN`
 
+# 参考n8n官方i18n介绍
+https://github.com/n8n-io/n8n/blob/master/packages/frontend/%40n8n/i18n/docs/README.md
+
 # 添加其他语言包
 请PR 语言文件到 languages 目录下，github action会在下一个n8n版本自动打包
 
