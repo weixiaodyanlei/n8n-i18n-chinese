@@ -33,7 +33,7 @@ docker-compose up
 # 原理
 > editor-ui是支持i18n的，但是未开放语言包
 
-1. 手动添加 zh-CN.json 到 editor-ui i18n里面，然后重新编译
+1. 手动添加 zh-CN.json 到 editor-ui `/src/plugins/i18n/locales/` 里面，然后重新编译
 2. 环境里面设置语言即可正常使用中文  `N8N_DEFAULT_LOCALE=zh-CN`
 
 # 添加其他语言包
