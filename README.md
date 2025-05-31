@@ -1,16 +1,6 @@
-# 语言教程
-## 设置环境变量
-> 其他语言参考：https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
-
-N8N_DEFAULT_LOCALE=zh-CN
-
-## 替换editor-ui包
-去release里面下载对应的版本 编辑器UI 文件，然后映射docker容器里面的 编辑器UI 目录路径
-
-/usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist
-
-
-## 完整测试docker命令
+# 安装教程
+## docker安装
+> 其他命令参考n8n官方文档
 ```shell
 docker run -it --rm --name n8ntest \
 -p 15678:5678 \
@@ -20,7 +10,7 @@ docker run -it --rm --name n8ntest \
 n8nio/n8n
 ```
 
-## 使用docker-compose
+## docker-compose安装
 请切换到对应版本的tag后，在执行
 ```shell
 # 拉取代码
@@ -32,11 +22,24 @@ git checkout n8n@1.86.1
 docker-compose up
 ``` 
 
+## npx本地启动n8n替换安装
+> 其他本地方式启动的话参考这个即可
+1. 找到路径：C:\Users\xxxxxx\AppData\Local\npm-cache\_npx\xxxxxx\node_modules\n8n-editor-ui\dist
+2. 下载对应版本editor-ui.tar.gz文件
+4. 解压到 dist目录下替换
+5. 设置环境变量 N8N_DEFAULT_LOCALE=zh-CN，自行咨询AI设置方法
+6. 重启 n8n 服务
+
 # 原理
 > editor-ui是支持i18n的，但是未开放语言包
 
-手动添加 zh-CN.json 到 editor-ui i18n里面，然后重新编译
-环境里面设置语言即可正常使用中文
+1. 手动添加 zh-CN.json 到 editor-ui i18n里面，然后重新编译
+2. 环境里面设置语言即可正常使用中文  `N8N_DEFAULT_LOCALE=zh-CN`
 
 # 添加其他语言包
 请PR 语言文件到 languages 目录下，github action会在下一个n8n版本自动打包
+
+# 语言环境变量
+> 其他语言参考：https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
+
+N8N_DEFAULT_LOCALE=zh-CN
