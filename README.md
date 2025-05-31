@@ -24,7 +24,7 @@ docker-compose up
 
 ## npx本地启动n8n替换安装
 > 其他本地方式启动的话参考这个即可
-1. 找到路径：C:\Users\xxxxxx\AppData\Local\npm-cache\_npx\xxxxxx\node_modules\n8n-editor-ui\dist
+1. 找到路径：C:\Users\xxxxxx\AppData\Local\npm-cache\_npx\n8n\node_modules\n8n-editor-ui\dist
 2. 下载对应版本editor-ui.tar.gz文件
 4. 解压到 dist目录下替换
 5. 设置环境变量 N8N_DEFAULT_LOCALE=zh-CN，自行咨询AI设置方法
