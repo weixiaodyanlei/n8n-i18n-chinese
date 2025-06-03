@@ -596,7 +596,7 @@
     "credentialEdit.credentialEdit.testing": "正在测试",
     "credentialEdit.credentialEdit.info.sharee": "只有 {credentialOwnerName} 可以编辑此连接",
     "credentialEdit.credentialInfo.allowUseBy": "允许以下用户使用",
-    "credentialEdit.credentialInfo.created": "已创建",
+    "credentialEdit.credentialInfo.created": "创建时间",
     "credentialEdit.credentialInfo.id": "ID",
     "credentialEdit.credentialInfo.lastModified": "上次修改时间",
     "credentialEdit.credentialEdit.setupGuide": "设置指南",
