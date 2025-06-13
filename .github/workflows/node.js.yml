@@ -91,7 +91,7 @@ jobs:
 
     - name: Move editor-ui i18n language
       if: steps.check_tag.outputs.exists == 'false'
-      run:     cp -r /home/runner/work/n8n-i18n-chinese/n8n-i18n-chinese/n8n-i18n-chinese/languages/* "${{ steps.editorui_dir.outputs.dir }}/src/plugins/i18n/locales/"
+      run:     cp -r /home/runner/work/n8n-i18n-chinese/n8n-i18n-chinese/n8n-i18n-chinese/languages/* "/home/runner/work/n8n-i18n-chinese/n8n-i18n-chinese/n8n/packages/frontend/@n8n/i18n/src/locales/"
 
     - name: Patch New editor-ui
       if: steps.editorui_dir.outputs.flag == 'new' && steps.check_tag.outputs.exists == 'false'
