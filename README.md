@@ -31,6 +31,30 @@ docker-compose up
 5. 设置环境变量 N8N_DEFAULT_LOCALE=zh-CN，自行咨询AI设置方法
 6. 重启 n8n 服务
 
+# 单个节点翻译
+## 节点属性翻译
+n8n-nodes-base.nodes.[节点名称].nodeView.[属性名称].[displayName/description/hint/placeholder]
+## 节点options属性翻译
+n8n-nodes-base.nodes.[节点名称].nodeView.[属性名称].options.[选项名称].[displayName/description]
+## 示例
+```json
+{
+    "n8n-nodes-base": {
+        "nodes": {
+            "code": {
+                "nodeView": {
+                    "notice": {
+                        "displayName": "输入<code> $ </code> <a target="_ blank" href="https://docs.n8n.io/code-examples/methods-variables-reference--reference/">特殊vars/methods </a>。通过使用<code> console.log()</code>语句进行调试，并在浏览器控制台中查看其输出。"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+## debug
+浏览器搜索关键词 inputLabelDisplayName，断点 nodeText
+
 # 原理
 > editor-ui是支持i18n的，但是未开放语言包
 
