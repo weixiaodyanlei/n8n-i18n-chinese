@@ -44,7 +44,7 @@ n8n-nodes-base.nodes.[节点名称].nodeView.[属性名称].options.[选项名�
             "code": {
                 "nodeView": {
                     "notice": {
-                        "displayName": "输入<code> $ </code> <a target="_ blank" href="https://docs.n8n.io/code-examples/methods-variables-reference--reference/">特殊vars/methods </a>。通过使用<code> console.log()</code>语句进行调试，并在浏览器控制台中查看其输出。"
+                        "displayName": "输入<code> $ </code> <a target=\"_ blank\" href=\"https: //docs.n8n.io/code-examples/methods-variables-reference--reference/\">特殊vars/methods </a>。通过使用<code> console.log()</code>语句进行调试，并在浏览器控制台中查看其输出。"
                     }
                 }
             }
