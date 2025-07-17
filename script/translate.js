@@ -26,7 +26,12 @@ async function doTranslate(message, language) {
             "messages": [
                 {
                     "role": "system",
-                    "content": "你是一个翻译助手，你的任务是将英文文本翻译成指定的语言。请将以下英文文本翻译成" + language + "：" + '\n' + '限制：不要输出与翻译无关的任何内容，仅做翻译任务'
+                    "content": `
+你是n8n项目的翻译助手，你的任务是将英文文本翻译成指定的语言。请将以下英文文本翻译成 ${language}
+## 限制：
+- 仅输出翻译后的内容
+- 不要处理 {} 里面包裹的变量名称
+`
                 },
                 {
                     "role": "user",
@@ -36,13 +41,30 @@ async function doTranslate(message, language) {
         }),
     });
 
+    // 请求过多，等待重试
+    if (response.status === 429){
+        console.log('翻译请求过多，等待1s后重试...');
+        return new Promise((resolve) => {
+            return setTimeout(async () => {
+                resolve(await doTranslate(message, language));
+            }, 1000);
+        });
+    }
+
+    if (response.status !== 200){
+        throw new Error(`翻译请求失败: ${response.status} ${response.statusText}`);
+    }
+
     const data = await response.json();
 
     if (data.error){
         throw new Error("翻译失败: ", data.error.message);
     }
 
-    return data.choices[0].message.content
+    const content =  data.choices[0].message.content
+
+    // 删除思考 <think></think>
+    return content.replace(/<think>[\s\S]*>?<\/think>/g, '').trim();
 }
 
 function putObjectValue(obj, key, value) {
@@ -114,7 +136,7 @@ function collectMessages(oldSourceLanguages, newSourceLanguages, targetLanguages
 
 async function run(){
     const oldEnLanguages = require("./en.json");
-    const newEnLanguages = await fetch("https://ghfast.top/https://raw.githubusercontent.com/n8n-io/n8n/master/packages/frontend/editor-ui/src/plugins/i18n/locales/en.json")
+    const newEnLanguages = await fetch("https://raw.githubusercontent.com/n8n-io/n8n/master/packages/frontend/%40n8n/i18n/src/locales/en.json")
         .then(res => res.json())
 
     for (const targetLanguage of targetLanguages) {
