@@ -6,6 +6,7 @@
 docker run -it --rm --name n8ntest \
 -p 15678:5678 \
 -v 【替换为下载的编辑器UI目录】:/usr/local/lib/node_modules/n8n/node_modules/n8n-editor-ui/dist \
+-v ~/.n8n:/home/node/.n8n \
 -e N8N_DEFAULT_LOCALE=zh-CN \
 -e N8N_SECURE_COOKIE=false \
 n8nio/n8n
@@ -71,10 +72,3 @@ https://github.com/n8n-io/n8n/blob/master/packages/frontend/%40n8n/i18n/docs/REA
 > 其他语言参考：https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
 
 N8N_DEFAULT_LOCALE=zh-CN
-
-## 赞助
-CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
-
-[Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne](https://edgeone.ai/?from=github)
-
-![image](https://github.com/user-attachments/assets/aad21026-af2f-47df-864a-8017b42e161d)
