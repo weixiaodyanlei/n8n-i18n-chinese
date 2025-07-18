@@ -12,6 +12,11 @@
   },
   "private": true,
   "devDependencies": {
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "n8n-nodes-base": "latest",
+    "qs": "latest"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

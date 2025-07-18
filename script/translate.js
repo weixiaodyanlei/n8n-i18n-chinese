@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require('fs');
-
+const lodash = require("lodash")
 
 if (!process.env.OPENAI_API_KEY){
     console.error("请设置环境变量 OPENAI_API_KEY");
@@ -43,7 +43,8 @@ async function doTranslate(message, language) {
 
     // 请求过多，等待重试
     if (response.status === 429){
-        console.log('翻译请求过多，等待1s后重试...');
+        const body = await response.text();
+        console.log('翻译请求过多，等待1s后重试...', response.status, response.statusText, body);
         return new Promise((resolve) => {
             return setTimeout(async () => {
                 resolve(await doTranslate(message, language));
@@ -136,7 +137,8 @@ function collectMessages(oldSourceLanguages, newSourceLanguages, targetLanguages
 
 async function run(){
     const oldEnLanguages = require("./en.json");
-    const newEnLanguages = await fetch("https://raw.githubusercontent.com/n8n-io/n8n/master/packages/frontend/%40n8n/i18n/src/locales/en.json")
+    const newEnNodesLanguages = fs.existsSync("./en-nodes.json") ? require("./en-nodes.json") : {};
+    let newEnLanguages = await fetch("https://raw.githubusercontent.com/n8n-io/n8n/master/packages/frontend/%40n8n/i18n/src/locales/en.json")
         .then(res => res.json())
 
     for (const targetLanguage of targetLanguages) {
@@ -146,6 +148,8 @@ async function run(){
             targetLanguages = JSON.parse(fs.readFileSync(fileName, "utf8"))
         }
         const waitTranslateList = []
+
+        newEnLanguages = lodash.merge({}, newEnLanguages, newEnNodesLanguages);
         collectMessages(oldEnLanguages, newEnLanguages , targetLanguages, "", waitTranslateList)
         await translate(waitTranslateList, targetLanguages, targetLanguage.label);
         // 最后使用 enLanguages的key  排序 targetLanguages key
