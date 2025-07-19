@@ -153,5 +153,5 @@ jobs:
         prerelease: false
         files: ${{ steps.editorui_dir.outputs.dir }}/editor-ui.tar.gz
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
