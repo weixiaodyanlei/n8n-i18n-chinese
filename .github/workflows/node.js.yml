@@ -63,7 +63,7 @@ jobs:
     - uses: actions/setup-node@v4.2.0
       if: steps.check_tag.outputs.exists == 'false'
       with:
-        node-version: 20.x
+        node-version: 22.x
 
     - name: Setup corepack and pnpm
       if: steps.check_tag.outputs.exists == 'false'
